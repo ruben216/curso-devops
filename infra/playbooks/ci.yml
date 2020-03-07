@@ -1,4 +1,6 @@
 - hosts: all
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
   - name: Add Jenkins repository's key
     become: yes
@@ -23,6 +25,7 @@
     apt:
       name: jenkins
   - name: Copy web SSH private key
+    become: yes
     copy:
       src: ../ssh-keys/id_rsa
       dest: /home/vagrant/id_rsa
